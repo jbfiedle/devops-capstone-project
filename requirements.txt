@@ -7,6 +7,8 @@ Flask==2.1.2
 Flask-SQLAlchemy==2.5.1
 psycopg2-binary==2.9.3
 python-dotenv==0.20.0
+Flask-Talisman
+Flask-Cors
 
 # Runtime dependencies
 gunicorn==20.1.0
@@ -27,16 +29,3 @@ coverage==6.3.2
 
 # Utilities
 httpie==3.2.1
-
-from flask import Flask
-from flask_talisman import Talisman
-app = Flask(__name__)
-# Create a content security policy and apply it
-csp = {
-    'default-src': '\'self\''
-}
-talisman = Talisman(app, content_security_policy=csp)
-@app.route('/', methods=['GET'])
-def index():
-    """Base URL for our service"""
-    return app.send_static_file("index.html")
